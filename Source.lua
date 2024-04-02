@@ -51,6 +51,7 @@ function EasyPath:WalkToPath(CustomPath)
 		for i = 1, #WayPoints do
 			local point = WayPoints[i]
 			if CustomPath.VisualPath == true then
+				print("Made Visual Point")
 				EasyPath:CreateVisualWaypoint(point, CustomPath.VisualPathSize, CustomPath.VisualPathColor, CustomPath.VisualPathOffset)
 			end
 			game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(point.Position)
