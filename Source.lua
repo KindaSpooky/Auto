@@ -50,6 +50,7 @@ function EasyPath:WalkToPath(CustomPath)
 		local WayPoints = WalkToPathfinding:GetWaypoints()
 		for i = 1, #WayPoints do
 			local point = WayPoints[i]
+			print("Made A Point")
 			if CustomPath.VisualPath == true then
 				print("Made Visual Point")
 				EasyPath:CreateVisualWaypoint(point, CustomPath.VisualPathSize, CustomPath.VisualPathColor, CustomPath.VisualPathOffset)
