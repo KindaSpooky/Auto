@@ -33,7 +33,7 @@ end
 
 function EasyPath:WalkToPath(CustomPath)
 	local PlayerWalkspeed = tonumber(game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
-	local WalkToPathfinding = game:GetService("PathfindingService"):CreatePath()
+	local WalkToPathfinding = game:GetService("PathfindingService"):CreatePath({AgentRadius = 3})
 
 	if typeof(CustomPath.Destination) == "CFrame" then
 		EasyPath:CFrameToPart(CustomPath.Destination)
