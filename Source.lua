@@ -33,10 +33,11 @@ end
 
 function EasyPath:WalkToPath(CustomPath)
 	local PlayerWalkspeed = tonumber(game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
-	local WalkToPathfinding = game:GetService("PathfindingService"):CreatePath({AgentRadius = 9})
+	local WalkToPathfinding = game:GetService("PathfindingService"):CreatePath({AgentRadius = 9, AgentCanJump = true})
 
 	if typeof(CustomPath.Destination) == "CFrame" then
 		EasyPath:CFrameToPart(CustomPath.Destination)
+	
 		WalkToPathfinding:ComputeAsync(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, game:GetService("Workspace").EasyPath_CFrameReference.Position + CustomPath.PathOffset)
 	elseif typeof(CustomPath.Destination) == "Vector3" then
 		WalkToPathfinding:ComputeAsync(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, CustomPath.Destination + CustomPath.PathOffset)
@@ -48,11 +49,12 @@ function EasyPath:WalkToPath(CustomPath)
 			print("Status: Starting...")
 		end
 		local WayPoints = WalkToPathfinding:GetWaypoints()
+		
 		for i = 1, #WayPoints do
 			local point = WayPoints[i]
-			print("Made A Point")
+			
 			if CustomPath.VisualPath == true then
-				print("Made Visual Point")
+				
 				EasyPath:CreateVisualWaypoint(point, CustomPath.VisualPathSize, CustomPath.VisualPathColor, CustomPath.VisualPathOffset)
 			end
 			game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(point.Position)
