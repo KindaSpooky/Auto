@@ -1,5 +1,23 @@
 local EasyPath = {}
 
+local TweenService = game:GetService("TweenService")
+
+function MakeTween(PlayerRootPart, Dest)
+	local part = PlayerRootPart
+	
+
+	local goal = {}
+	goal.CFrame = CFrame.new(Dest)
+	
+
+	local tweenInfo = TweenInfo.new(.1)
+
+	local tween = TweenService:Create(part, tweenInfo, goal)
+
+	tween:Play()
+	wait(tweenInfo)
+end
+
 function EasyPath:CreateVisualWaypoint(WaypointPosition, WaypointSize, WaypointColor, WaypointOffset)
 	local neonBall = Instance.new("Part")
 	neonBall.Size = WaypointSize
@@ -57,7 +75,8 @@ function EasyPath:WalkToPath(CustomPath)
 				
 				EasyPath:CreateVisualWaypoint(point, CustomPath.VisualPathSize, CustomPath.VisualPathColor, CustomPath.VisualPathOffset)
 			end
-			game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(point.Position)
+			MakeTween(game.Workspace:WaitForChild(game:GetService("Players").LocalPlayer.Name).HumanoidRootPart, point.Position)
+			--[[game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(point.Position)
 			local Success = game:GetService("Players").LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
 			if point.Action == Enum.PathWaypointAction.Jump then
 				if not CustomPath.StrongAnticheat == true then
@@ -82,7 +101,7 @@ function EasyPath:WalkToPath(CustomPath)
 				if CustomPath.DebugMode == true then
 					print("Status: Walking To The Part...")
 				end
-			end
+			end]]
 		end
 	else
 		if CustomPath.DebugMode == true then
